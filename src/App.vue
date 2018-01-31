@@ -15,7 +15,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Bienvenido a Anuncios App'
+      msg: 'Bienvenido a Twitter'
     }
   }
 }
