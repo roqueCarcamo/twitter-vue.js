@@ -19,14 +19,14 @@
         </select>
         </label>
       </p>
-      <button @click.prevent="create">Create</button>
+      <button @click.prevent="create" >Create</button>
     </form>
     <h3>{{ msg }}</h3>
     <hr />
     <p v-if="loading">Loading ...</p>
     <ul v-else>
-      <li v-for="twees in twests" :key="twees._id">
-       {{ twees.content }} -  {{ twees.location }} - {{ twees.author.firstname }} {{ twees.author.lastname }}
+      <li v-for="(twees, index) in twests" :key="twees._id">
+       {{ index +1 }} ) {{ twees.content }} -  {{ twees.location }} - {{ twees.author.firstname }} {{ twees.author.lastname }}
       </li>
     </ul>
   </div>
@@ -63,7 +63,6 @@ export default {
       .then( response => {
         this.loading = false;
         this.twests = response.data.twests;
-        console.log(this.twests);
       })
     },
     _loadUsers(){
@@ -80,13 +79,16 @@ export default {
         payload+=`${key}=${this.tweestModel[key]}&`
       });
       
-      axios.post(`${config.baseURL}/tweets/?limit=20`, payload, {
+      axios.post(`${config.baseURL}/tweets`, payload, {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
       .then( response => {
+        this.tweestModel.content="";
+        this.tweestModel.location="";
+        this.tweestModel.author="";
         this._loadTweest();
       })
     }
@@ -114,7 +116,6 @@ ul {
 }
 
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 
