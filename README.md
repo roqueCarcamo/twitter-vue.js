@@ -4,6 +4,8 @@
 
 ## Build Setup
 
+* Cambiar url en los archivos webpack.config.js y config.json. 
+
 ``` bash
 # install dependencies
 npm install
